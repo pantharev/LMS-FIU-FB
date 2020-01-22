@@ -3,5 +3,5 @@ module.exports = {
     PORT: "3306",
     USER: "root",
     PASSWORD: "root",
-    DB: "lms_fiu_db"
+    DB: "lms_fiu_fb"
 };

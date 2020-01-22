@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
     res.json({ message: "Hello world!"});
 });
 
-require("./routes/student.routes")(app);
+require("./app/routes/student.routes.js")(app);
 
 app.listen(port, () => {
     console.log("Server is running on port: " + port);

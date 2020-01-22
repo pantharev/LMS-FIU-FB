@@ -49,7 +49,7 @@ Student.getAll = result => {
 
 Student.updateById = (id, student, result) => {
     return new Promise((resolve, reject) => {
-        sql.query("UPDATE students SET email = ?, f_name = ?, l_name = ?, active = ?, WHERE id = ?",
+        sql.query("UPDATE students SET email = ?, f_name = ?, l_name = ?, active = ? WHERE id = ?",
             [student.email, student.f_name, student.l_name, student.active, id], (err, res) => {
                 if(err) {
                     result(null, err);
@@ -81,9 +81,11 @@ Student.deleteAll = result => {
                 result(null, err);
                 return reject(err);
             }
-            console.log(`deleted ${res.affectedRows} customers`);
+            console.log(`deleted ${res.affectedRows} students`);
             result(null, res);
             return resolve(res);
         });
     });
 };
+
+module.exports = Student;
