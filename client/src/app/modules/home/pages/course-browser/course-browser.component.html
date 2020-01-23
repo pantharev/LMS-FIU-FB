@@ -1,0 +1,19 @@
+<h2>Courses</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th *ngFor="let colName of displayedColumns" scope="col">{{ colName }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses">
+            <th scope="row">{{ course.id }}</th>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+            <td>{{ course.seats }}</td>
+            <td>{{ course.start_date }}</td>
+            <td>{{ course.end_date }}</td>
+        </tr>
+    </tbody>
+</table>
