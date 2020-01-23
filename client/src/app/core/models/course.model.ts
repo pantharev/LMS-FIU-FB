@@ -3,6 +3,6 @@ export interface Course {
     name: String,
     description: String,
     seats: number,
-    start_date: Date,
-    end_date: Date
+    start_date: String,
+    end_date: String
 }
