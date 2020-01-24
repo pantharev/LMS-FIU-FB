@@ -25,6 +25,10 @@ exports.create = (req, res) => {
                 message: err.message || "Some error occured while creating the Course."
             });
         else res.send(data);
+    }).then(() => {
+        console.log('Created course successfully!');
+    }).catch((err) => {
+        console.log(`Error creating the course\n${err}`);
     });
 };
 
@@ -36,6 +40,10 @@ exports.findAll = (req, res) => {
                 message: err.message || "Some error occurred while retrieving courses."
             });
         else res.send(data);
+    }).then(() => {
+        console.log('Found all courses successfully');
+    }).catch((err) => {
+        console.log(`Error retrieving the courses\n${err}`);
     })
 };
 
@@ -55,6 +63,10 @@ exports.findOne = (req, res) => {
         } else {
             res.send(data);
         }
+    }).then(() => {
+        console.log(`Course findById(${req.params.courseId}) was found`);
+    }).catch((err) => {
+        console.log(`Error findById(${req.params.courseId}), couldn't find/retrieve course\n${err}`);
     })
 };
 
@@ -75,12 +87,16 @@ exports.update = (req, res) => {
                 });
             } else {
                 res.status(500).send({
-                    message: "Error updating Course with id " + req.params.courseId
+                    message: err.message || "Error updating Course with id " + req.params.courseId
                 });
             }
         } else {
             res.send(data);
         }
+    }).then(() => {
+        console.log(`Course UpdateByID(${req.params.courseId}) Promise resolved`);
+    }).catch((err) => {
+        console.log(`Course UpdateById(${req.params.courseId}) Promise Rejected \n${err}`);
     });
 };
 
@@ -100,7 +116,14 @@ exports.delete = (req, res) => {
         } else {
             res.send({ message: `Course was deleted successfully!`});
         }
-    });
+    }).then(() => {
+        console.log(`Resolved: Course ${req.params.courseId} was deleted successfully!`);
+    }).catch((err) => {
+        if(err.kind == "not_found")
+            console.log(`Rejected: Couldn't find Course with id ${req.params.courseId}\n${err}`);
+        else
+            console.log(`Rejected: Could not delete Course with id ${req.params.courseId}\n${err}`);
+    })
 };
 
 // Delete all courses from the database

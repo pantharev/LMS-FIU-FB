@@ -38,7 +38,7 @@ Student.getAll = result => {
     return new Promise((resolve, reject) => {
         sql.query("SELECT * FROM students", (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             result(null, res);
@@ -52,7 +52,7 @@ Student.updateById = (id, student, result) => {
         sql.query("UPDATE students SET email = ?, f_name = ?, l_name = ?, active = ? WHERE id = ?",
             [student.email, student.f_name, student.l_name, student.active, id], (err, res) => {
                 if(err) {
-                    result(null, err);
+                    result(err, null);
                     return reject(err);
                 }
                 result(null, { id: id, ...student});
@@ -65,7 +65,7 @@ Student.delete = (id, result) => {
     return new Promise((resolve, reject) => {
         sql.query("DELETE FROM students WHERE id = ?", id, (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             result(null, res);
@@ -78,7 +78,7 @@ Student.deleteAll = result => {
     return new Promise((resolve, reject) => {
         sql.query("DELETE FROM students", (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             console.log(`deleted ${res.affectedRows} students`);
