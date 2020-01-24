@@ -17,10 +17,10 @@ export class CreateCourseComponent implements OnInit {
   constructor(private courseService: CourseService, private fb: FormBuilder, private router: Router) {
     this.courseForm = this.fb.group({
       name: ['', Validators.required],
-      description: [''],
-      seats: [''],
-      start_date: [''],
-      end_date: ['']
+      description: ['', Validators.required],
+      seats: ['', Validators.required],
+      start_date: ['', Validators.required],
+      end_date: ['', Validators.required]
     });
    }
 
@@ -28,9 +28,11 @@ export class CreateCourseComponent implements OnInit {
   }
 
   addCourse(name, description, seats, start_date, end_date) {
+    if(this.courseForm.valid)
     this.courseService.addCourse(name, description, seats, start_date, end_date).subscribe(() => {
       this.router.navigate(['/admin']);
     });
+    else alert('Missing required fields!');
   }
 
 }

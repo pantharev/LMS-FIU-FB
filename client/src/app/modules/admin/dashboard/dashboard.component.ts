@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   }
 
   editCourse(id) {
-    this.router.navigate([`admins/edit/${id}`]);
+    this.router.navigate([`admin/edit-course/${id}`]);
   }
 
   deleteCourse(id) {

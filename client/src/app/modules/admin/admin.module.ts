@@ -6,10 +6,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminRoutingModule } from './admin-routing.module';
+import { EditCourseComponent } from './edit-course/edit-course.component';
 
 
 @NgModule({
-  declarations: [CreateCourseComponent, DashboardComponent],
+  declarations: [CreateCourseComponent, DashboardComponent, EditCourseComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

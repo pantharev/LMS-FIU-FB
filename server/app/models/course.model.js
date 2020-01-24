@@ -39,7 +39,7 @@ Course.getAll = result => {
     return new Promise((resolve, reject) => {
         sql.query("SELECT * FROM courses", (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             result(null, res);
@@ -50,10 +50,10 @@ Course.getAll = result => {
 
 Course.updateById = (id, course, result) => {
     return new Promise((resolve, reject) => {
-        sql.query("UPDATE courses SET name = ?, description = ?, seats = ?, start_date = ?, end_date WHERE id = ?",
+        sql.query("UPDATE courses SET name = ?, description = ?, seats = ?, start_date = ?, end_date = ? WHERE id = ?",
             [course.name, course.description, course.seats, course.start_date, course.end_date, id], (err, res) => {
                 if(err) {
-                    result(null, err);
+                    result(err, null);
                     return reject(err);
                 }
                 result(null, { id: id, ...course});
@@ -66,7 +66,7 @@ Course.delete = (id, result) => {
     return new Promise((resolve, reject) => {
         sql.query("DELETE FROM courses WHERE id = ?", id, (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             result(null, res);
@@ -79,7 +79,7 @@ Course.deleteAll = result => {
     return new Promise((resolve, reject) => {
         sql.query("DELETE FROM courses", (err, res) => {
             if(err) {
-                result(null, err);
+                result(err, null);
                 return reject(err);
             }
             console.log(`deleted ${res.affectedRows} courses`);
