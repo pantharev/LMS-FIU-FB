@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit { 
   
-  user: SocialUser;
-  loggedIn: boolean
+  private user: SocialUser;
+  private loggedIn: boolean
 
-  constructor (private authService: AuthService, private router: Router) {}
+  constructor (private authService: AuthService) {}
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit() {
-    /*
+    
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
       console.log(this.user);
     });
-    */
+    
   }
 }
