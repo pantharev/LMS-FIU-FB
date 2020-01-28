@@ -43,9 +43,16 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteCourse(id) {
-    this.courseService.deleteCourse(id).subscribe(() => {
-      this.fetchCourses();
-    });
+    let r = confirm(`Delete Course ${id}: Are you sure?`);
+    if(r == true){
+      this.courseService.deleteCourse(id).subscribe(() => {
+        this.fetchCourses();
+      });
+    }
+  }
+
+  pendingEnrollment(id) {
+    this.router.navigate([`admin/pending-enrollment/${id}`]);
   }
 
 }

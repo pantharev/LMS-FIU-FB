@@ -8,7 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { CourseBrowserComponent } from './pages/course-browser/course-browser.component';
 
-import { CourseService } from '../../core/services/course.service';
+import { CourseService } from 'src/app/core/services/course.service';
 
 
 @NgModule({

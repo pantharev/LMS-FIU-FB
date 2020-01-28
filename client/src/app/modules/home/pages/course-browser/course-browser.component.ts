@@ -12,7 +12,7 @@ import { CourseService } from '../../../../core/services/course.service';
 export class CourseBrowserComponent implements OnInit {
 
   courses: Course[];
-  displayedColumns = ['id', 'name', 'description', 'seats', 'start_date', 'end_date'];
+  displayedColumns = ['id', 'name', 'description', 'seats', 'start_date', 'end_date', 'Enrollment'];
   page = 1;
 
   constructor(private courseService: CourseService, private router: Router) { }
@@ -36,6 +36,12 @@ export class CourseBrowserComponent implements OnInit {
         console.log('Data requested...');
         console.log(this.courses);
       });
+  }
+
+  studentEnroll(courseId) {
+    var student = localStorage.getItem('student');
+    // Add student to students_courses table with pending enrollment
+    console.log(`Enrollment pending for courseId: ${courseId}`);
   }
 
 }
