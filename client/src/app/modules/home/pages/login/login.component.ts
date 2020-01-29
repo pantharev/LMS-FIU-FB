@@ -7,28 +7,33 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit { 
-  
+export class LoginComponent implements OnInit {
+
   private user: SocialUser;
   private loggedIn: boolean
 
-  constructor (private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-  signOut(): void{
-    this.authService.signOut();
+  signOut(): void {
+    //this.authService.signOut();
+    this.user = null;
+    this.loggedIn = false;
+    window.location.reload();
+
+    console.log(this.user);
   }
-  
+
   ngOnInit() {
-    
+
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
       console.log(this.user);
     });
-    
+
   }
 }
