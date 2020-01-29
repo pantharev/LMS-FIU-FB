@@ -26,10 +26,13 @@ CREATE TABLE `students_courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
+  `enrollment_status` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `course_id` FOREIGN KEY (`id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `student_id` FOREIGN KEY (`id`) REFERENCES `students` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `uc_student_id_course_id` (`student_id`,`course_id`),
+  KEY `FK_CourseID` (`course_id`),
+  CONSTRAINT `FK_CourseID` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  CONSTRAINT `FK_StudentID` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +41,7 @@ CREATE TABLE `students_courses` (
 
 LOCK TABLES `students_courses` WRITE;
 /*!40000 ALTER TABLE `students_courses` DISABLE KEYS */;
-INSERT INTO `students_courses` VALUES (1,1,1),(2,2,1);
+INSERT INTO `students_courses` VALUES (1,1,1,'enrolled'),(2,2,1,'pending'),(3,1,2,'pending'),(4,2,2,'pending');
 /*!40000 ALTER TABLE `students_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-22 18:08:29
+-- Dump completed on 2020-01-29 17:48:17

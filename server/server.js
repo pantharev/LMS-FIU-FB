@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/student.routes.js")(app);
 require("./app/routes/course.routes.js")(app);
+require("./app/routes/student-course.routes.js")(app);
 
 app.listen(port, () => {
     console.log("Server is running on port: " + port);

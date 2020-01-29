@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,8 +9,10 @@ export class CourseService {
 
   constructor(private http: HttpClient) { }
 
-  getCourses() {
-    return this.http.get(`${environment.apiURL}/courses`);
+  getCourses(pageNo, npp) {
+    let params = new HttpParams().set("page", pageNo).set("npp", npp);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`${environment.apiURL}/courses`, {headers: headers, params: params});
   }
 
   getCourseById(id) {
