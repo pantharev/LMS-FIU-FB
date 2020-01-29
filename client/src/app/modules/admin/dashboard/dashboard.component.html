@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let course of courses">
+        <tr *ngFor="let course of courses.res">
             <th scope="row">{{ course.id }}</th>
             <td>{{ course.name }}</td>
             <td>{{ course.description }}</td>
@@ -29,4 +29,26 @@
     </tbody>
 </table>
 
-<ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+<nav aria-label="Page navigation course-library">
+    <ul class="pagination">
+
+        <ng-container *ngIf="page == 0; else elseBlock">
+            <li class="page-item disabled"><button class="page-link" (click)="fetchPageCourses(page-1)">Previous</button></li>
+        </ng-container>
+        <ng-template #elseBlock>
+            <li class="page-item"><button class="page-link" (click)="fetchPageCourses(page-1)">Previous</button></li>
+        </ng-template>
+
+        <ng-container *ngFor="let maxPages of maxPagesArray; let i = index">
+        <li class="page-item"><button class="page-link" (click)="fetchPageCourses(i)">{{i}}</button></li>
+        </ng-container>
+
+        <ng-container *ngIf="page == maxPages - 1; else elseBlock2">
+            <li class="page-item disabled"><button class="page-link" (click)="fetchPageCourses(page+1)">Next</button></li>
+        </ng-container>
+        <ng-template #elseBlock2>
+            <li class="page-item"><button class="page-link" (click)="fetchPageCourses(page+1)">Next</button></li>
+        </ng-template>
+        
+    </ul>
+  </nav>

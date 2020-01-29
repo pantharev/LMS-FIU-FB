@@ -34,7 +34,7 @@ exports.create = (req, res) => {
 
 // Retrieve all courses from the database.
 exports.findAll = (req, res) => {
-    Course.getAll((err, data) => {
+    Course.getAll(req, (err, data) => {
         if(err)
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving courses."

@@ -30,7 +30,7 @@ CREATE TABLE `courses` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Calculus 1','Introductory course to continuous math.',45,'2020-01-01','2020-06-06'),(2,'Calculus 2','Intermediate course to continuous math.',45,'2020-01-02','2020-06-07');
+INSERT INTO `courses` VALUES (1,'Calculus 1','Introductory course to continuous math.',55,'2020-01-06','2020-01-25'),(2,'Calculus 2','Intermediate course to continuous math.',45,'2020-01-06','2020-04-24'),(6,'Theory of Algorithms','Formal languages and automata theory.',50,'2020-01-06','2020-04-24');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-22 18:08:29
+-- Dump completed on 2020-01-29 17:48:16
