@@ -1,4 +1,4 @@
-<button type="button" (click)="signInWithFB()" *ngIf="loggedIn===false">Login</button>
+<button type="button" (click)="signInWithFB()">Login</button>
 <button type="button" (click)="signOut()" *ngIf="loggedIn===true">Sign Out</button>
 
 <img src = "{{user.photoUrl}}" *ngIf="loggedIn===true">

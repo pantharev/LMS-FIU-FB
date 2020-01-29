@@ -19,12 +19,14 @@ export class LoginComponent implements OnInit {
   }
 
   signOut(): void {
-    //this.authService.signOut();
+    this.authService.signOut();
+    /*
     this.user = null;
     this.loggedIn = false;
     window.location.reload();
 
     console.log(this.user);
+    */
   }
 
   ngOnInit() {
