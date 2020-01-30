@@ -51,7 +51,7 @@ export class CourseBrowserComponent implements OnInit {
       });
         //console.log('Data requested...');
         //console.log(this.courses);
-        this.router.navigate(['/courses', { page: page}]);
+        this.router.navigate(['/course-library', { page: page}]);
       });
   }
 
@@ -77,7 +77,7 @@ export class CourseBrowserComponent implements OnInit {
         console.log('Data requested...' + pageNo);
         //console.log(this.courses);
         //console.log("Current page: " + this.courses.pagination.current);
-        this.router.navigate(['/courses', { page: this.courses.pagination.current}]);
+        this.router.navigate(['/course-library', { page: this.courses.pagination.current}]);
       });
   }
 
