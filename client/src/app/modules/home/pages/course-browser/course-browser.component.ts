@@ -5,6 +5,10 @@ import { HttpParams } from '@angular/common/http';
 import { Course } from '../../../../core/models/course.model';
 import { CourseService } from '../../../../core/services/course.service';
 
+import { environment } from 'src/environments/environment';
+
+import io from "socket.io-client";
+
 @Component({
   selector: 'app-course-browser',
   templateUrl: './course-browser.component.html',
@@ -20,12 +24,15 @@ export class CourseBrowserComponent implements OnInit {
   currentPage;
   maxPages;
   maxPagesArray;
+  socket;
+  searchValue;
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     let page = this.route.snapshot.paramMap.get('page') || this.page;
     this.fetchCourses(page);
+    this.socket = io.connect(environment.apiURL);
     //console.log("Init page: " + page);
   }
 
@@ -85,6 +92,10 @@ export class CourseBrowserComponent implements OnInit {
     var student = localStorage.getItem('student');
     // Add student to students_courses table with pending enrollment
     console.log(`Enrollment pending for courseId: ${courseId}`);
+  }
+
+  searchCourse(searchTerm) {
+    this.socket.emit('search', searchTerm);
   }
 
 }
