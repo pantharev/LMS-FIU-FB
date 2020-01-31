@@ -12,7 +12,7 @@ import { CourseBrowserComponent } from './pages/course-browser/course-browser.co
 import { CourseService } from '../../core/services/course.service';
 import { LoginComponent } from './pages/login/login.component';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-import {MatIconModule, MatButtonModule, MatCardModule} from '@angular/material';
+import {MatIconModule, MatButtonModule, MatCardModule, MatOptionModule, MatAutocompleteModule, MatInputModule} from '@angular/material';
 
 const config = new AuthServiceConfig([
   {
@@ -36,7 +36,9 @@ export function provideConfig(){
     SocialLoginModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatOptionModule,
+    MatAutocompleteModule
   ],
   providers: [
     CourseService,

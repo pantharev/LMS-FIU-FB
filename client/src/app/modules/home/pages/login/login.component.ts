@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   signOut(): void {
-    this.authService.signOut();
+    this.authService.signOut().then(() => {
+      console.log('signed out');
+    }).catch(() => {
+      console.log("couldn't sign out");
+    });
     /*
     this.user = null;
     this.loggedIn = false;

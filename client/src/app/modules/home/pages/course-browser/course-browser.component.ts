@@ -19,6 +19,7 @@ export class CourseBrowserComponent implements OnInit {
   //courses: Course[];
   courses: any = {};
   pages: any = [];
+  searchedCourses: any = [];
   displayedColumns = ['id', 'name', 'description', 'seats', 'start_date', 'end_date', 'Enrollment'];
   page = 0;
   currentPage;
@@ -26,6 +27,8 @@ export class CourseBrowserComponent implements OnInit {
   maxPagesArray;
   socket;
   searchValue;
+  duplicateCourse = false;
+  num = 0;
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { }
 
@@ -92,10 +95,23 @@ export class CourseBrowserComponent implements OnInit {
     var student = localStorage.getItem('student');
     // Add student to students_courses table with pending enrollment
     console.log(`Enrollment pending for courseId: ${courseId}`);
-  }
+  } 
+
 
   searchCourse(searchTerm) {
-    this.socket.emit('search', searchTerm);
-  }
+    if(searchTerm == ""){
+      return;
+    }
 
+    this.socket.emit('search', searchTerm);
+
+    this.socket.on('search-data', (course) => {
+        this.searchedCourses.length = 0;
+        this.num++;
+        console.log(this.num);
+        course.forEach((val, i, arr) => {
+            this.searchedCourses.push(arr[i].name);
+        });
+      });
+    }
 }
