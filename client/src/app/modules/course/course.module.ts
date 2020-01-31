@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { CourseRoutingModule } from './course-routing.module';
+import { ModulesComponent } from './modules/modules.component';
  
 @NgModule({
-  declarations: [ DashboardComponent ],
+  declarations: [ DashboardComponent, ModulesComponent ],
   imports: [
     CommonModule,
     CourseRoutingModule

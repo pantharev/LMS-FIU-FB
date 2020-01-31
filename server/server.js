@@ -42,6 +42,7 @@ io.on('connection', function(socket) {
 require("./app/routes/student.routes.js")(app);
 require("./app/routes/course.routes.js")(app);
 require("./app/routes/student-course.routes.js")(app);
+require("./app/routes/module.routes.js")(app);
 
 /*http.listen(port, () => {
     console.log("http Server is running on port: " + port);
