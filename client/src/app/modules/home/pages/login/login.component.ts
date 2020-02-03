@@ -9,28 +9,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  private user: SocialUser;
-  private loggedIn: boolean
+  user: SocialUser;
+  loggedIn: boolean
 
   constructor(private authService: AuthService) { }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    //sessionStorage.setItem("user_fname",this.user.firstName);
+    //sessionStorage.setItem("user_lname",this.user.lastName);
+    sessionStorage.setItem("user_email",this.user.email);
   }
 
   signOut(): void {
-    this.authService.signOut().then(() => {
-      console.log('signed out');
-    }).catch(() => {
-      console.log("couldn't sign out");
-    });
-    /*
-    this.user = null;
-    this.loggedIn = false;
-    window.location.reload();
-
-    console.log(this.user);
-    */
+    this.authService.signOut();
+    sessionStorage.clear();
   }
 
   ngOnInit() {
