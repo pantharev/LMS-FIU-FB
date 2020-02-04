@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require('passport');
 
 const app = express();
 const http = require('http').createServer(app);
@@ -20,6 +21,12 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
+app.use(passport.initialize());
+
+// Auth 
+const passportSetup = require('./app/config/passport-setup');
+const authRoutes = require('./app/routes/auth-routes');
+app.use('/auth', authRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Hello world!"});
