@@ -6,6 +6,7 @@ const Student = function(student) {
     this.f_name = student.f_name;
     this.l_name = student.l_name;
     this.active = student.active;
+    this.user_id = student.user_id;
 };
 
 Student.create = (newStudent, result) => {
@@ -34,14 +35,23 @@ Student.findById = (studentId, result) => {
     });
 };
 
-Student.findByEmail = (studentEmail, result) => {
+Student.findByEmail = (studentEmail) => {
     return new Promise((resolve, reject) => {
         sql.query("CALL selectStudentByEmail(?)", [studentEmail], (err, res) => {
             if(err) {
-                result(err, null);
                 return reject(err);
             }
-            result(null, res[0]);
+            return resolve(res[0]);
+        });
+    });
+}
+
+Student.findByUserId = (userId) => {
+    return new Promise((resolve, reject) => {
+        sql.query("CALL selectStudentByUserId(?)", [userId], (err, res) => {
+            if(err) {
+                return reject(err);
+            }
             return resolve(res[0]);
         });
     });

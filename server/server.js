@@ -34,7 +34,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 const passportSetup = require('./app/config/passport-setup');
 const authRoutes = require('./app/routes/auth-routes');
+const profileRoutes = require('./app/routes/profile-routes');
 app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Hello world!"});
