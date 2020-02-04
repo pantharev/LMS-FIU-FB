@@ -15,10 +15,11 @@ router.get('/logout', (req, res) => {
 });
 
 // auth with facebook
-router.get('/facebook', passport.authenticate('facebook', {
-    scope: ['default']
-}));
+router.get('/facebook', passport.authenticate('facebook'));
 
+router.get('/facebook/redirect', (req, res) => {
+    res.send('callback URL');
+});
 
 
 module.exports = router;

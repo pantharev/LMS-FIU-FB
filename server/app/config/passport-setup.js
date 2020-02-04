@@ -1,16 +1,14 @@
 const passport = require('passport');
-const FacebookStrategy = require('passport-facebook');
+const FacebookStrategy = require('passport-facebook').Strategy;
 const keys = require('./keys');
 
 passport.use(new FacebookStrategy({
     clientID: keys.facebook.clientID,
     clientSecret: keys.facebook.clientSecret,
-    callbackURL: "/auth/facebook/redirect"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate(... function(err, user) {
-      if (err) { return done(err); }
-      done(null, user);
-    });
-  }
+    callbackURL: "/auth/facebook/redirect",
+},
+    (accessToken, refreshToken, profile, done) => {
+        console.log('passport callback function fired');
+        console.log(profile);
+    }
 ));
