@@ -12,12 +12,17 @@ router.get('/login', (req, res) => {
 router.get('/logout', (req, res) => {
     // handle with passport
     res.send('logging out');
+    req.logout();
 });
 
 // auth with facebook
-router.get('/facebook', passport.authenticate('facebook'));
+router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 
-router.get('/facebook/redirect', (req, res) => {
+const options = {
+    successRedirect: '/',
+    failureRedirect: '/auth/login'
+}
+router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
     res.send('callback URL');
 });
 
