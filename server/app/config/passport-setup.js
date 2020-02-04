@@ -34,8 +34,7 @@ passport.use(new FacebookStrategy({
           email: email,
           f_name: first_name,
           l_name: last_name,
-          active: 1,
-          user_id: id
+          active: 1
         };
 
         const student = new Student(userData);

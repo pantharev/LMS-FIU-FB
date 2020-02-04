@@ -16,31 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `courses`
+-- Table structure for table `course_details`
 --
 
-DROP TABLE IF EXISTS `courses`;
+DROP TABLE IF EXISTS `course_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `courses` (
+CREATE TABLE `course_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(250) NOT NULL,
-  `seats` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `course_name` varchar(45) DEFAULT NULL,
+  `instructor_name` varchar(45) DEFAULT NULL,
+  `office` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `content` varchar(250) DEFAULT NULL,
+  `course_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `course_id` (`course_id`),
+  CONSTRAINT `FK_course_id` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `courses`
+-- Dumping data for table `course_details`
 --
 
-LOCK TABLES `courses` WRITE;
-/*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,'Calculus 1','Introductory course to continuous math.',55,'2020-01-06','2020-01-25'),(2,'Calculus 2','Intermediate course to continuous math.',45,'2020-01-06','2020-04-24'),(6,'Theory of Algorithms','Formal languages and automata theory.',50,'2020-01-06','2020-04-24');
-/*!40000 ALTER TABLE `courses` ENABLE KEYS */;
+LOCK TABLES `course_details` WRITE;
+/*!40000 ALTER TABLE `course_details` DISABLE KEYS */;
+INSERT INTO `course_details` VALUES (1,'Calculus 2','Dr. Caligari','5th avenue 4:00pm MWF','555-555-5555','mail@mail.com','To understand integration techniques for future courses in STEM',2);
+/*!40000 ALTER TABLE `course_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
