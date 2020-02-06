@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require('passport');
+const cookieSession = require('cookie-session');
+const keys = require('./app/config/keys');
 
 const app = express();
 const http = require('http').createServer(app);
@@ -21,12 +23,20 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
-app.use(passport.initialize());
 
 // Auth 
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [keys.session.cookieKey]
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 const passportSetup = require('./app/config/passport-setup');
 const authRoutes = require('./app/routes/auth-routes');
+const profileRoutes = require('./app/routes/profile-routes');
 app.use('/auth', authRoutes);
+app.use('/profile', profileRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "Hello world!"});

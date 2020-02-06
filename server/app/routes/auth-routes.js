@@ -23,7 +23,7 @@ const options = {
     failureRedirect: '/auth/login'
 }
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    res.send('callback URL');
+    res.redirect('/profile/');
 });
 
 

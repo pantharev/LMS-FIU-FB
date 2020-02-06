@@ -4,8 +4,28 @@ const keys = require('./keys');
 const Student = require("../models/student.model");
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
-})
+  console.log("Successfully serialized user");
+  console.log("The user is: " + JSON.stringify(user));
+  console.log("id: " + user[0].user_id);
+  done(null, user[0].user_id);
+});
+
+passport.deserializeUser((id, done) => {
+  Student.findByUserId(id).then((student) => {
+    console.log("student deserialized: " + JSON.stringify(student));
+    done(null, student);
+  }).catch(() => {
+    console.log("Couldn't find by id");
+  });
+  //console.log("Successfully deserialized user");
+  //done(null, user);
+});
+
+/*passport.deserializeUser((email, done) => {
+  Student.findByEmail(email).then((student) => {
+    done(null, student);
+  });
+})*/
 
 passport.use(new FacebookStrategy({
     clientID: keys.facebook.clientID,
@@ -16,48 +36,43 @@ passport.use(new FacebookStrategy({
 },
     (accessToken, refreshToken, profile, done) => {
         console.log('passport callback function fired');
-        const { email, first_name, last_name } = profile._json;
+        console.log(profile._json);
+        const { email, first_name, last_name, id } = profile._json;
 
         const userData = {
           email: email,
           f_name: first_name,
           l_name: last_name,
-          active: 1
+          active: 1,
+          user_id: id
         };
 
         const student = new Student(userData);
 
-        Student.findByEmail(email, (err, data) => {
-          if(err) {
-            console.log("Couldn't find student with email: " + email);
-          }
-          console.log(data);
-        }).then((value) => {
-          console.log("Successfully found student by email: " + email);
+        Student.findByUserId(id).then((value) => {
+          console.log("Successfully found student by id: " + id);
           console.log(value);
-          done();
-          //studData.push(val);
+          return done(null, value);
         }).catch((reason) => {
-          console.error("Couldn't find student with email: " + email);
+          console.error("Couldn't find student with id: " + id);
           console.error(reason);
-        });
-
-        Student.create(student, (err, data) => {
-          if(err){
-              console.error("student already exists");
-              return;
-          }
-          console.log(data);
-        }).then((value) => {
-          console.log("Successfully added student to students table");
-          done();
-        }).catch((reason) => {
-          console.error("Error adding student to students table\n" + reason);
+            Student.create(student, (err, data) => {
+              if(err){
+                  console.error("student already exists");
+              }
+              console.log(data);
+              //done(null, data);
+            }).then((value) => {
+              console.log("Successfully added student to students table");
+              return done(null, value);
+            }).catch((reason) => {
+              console.error("Error adding student to students table\n" + reason);
+            });
         });
 
         console.log('email: ' + email + '\n' + 'first_name: ' + first_name + '\nlast_name: ' + last_name);
         //console.log(profile);
         //console.log(profile._json.email); 
-        done();
+        //done();
     }
 ));

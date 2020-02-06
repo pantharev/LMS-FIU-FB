@@ -26,7 +26,7 @@ CREATE TABLE `modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` smallint(6) NOT NULL,
   `title` varchar(45) NOT NULL,
-  `lockedUntil` date DEFAULT NULL,
+  `lockedUntil` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +37,7 @@ CREATE TABLE `modules` (
 
 LOCK TABLES `modules` WRITE;
 /*!40000 ALTER TABLE `modules` DISABLE KEYS */;
-INSERT INTO `modules` VALUES (1,1,'Get Started','2020-02-02'),(2,1,'Get Started with Calc 2',NULL),(3,2,'Learn Integration by parts','2020-02-20');
+INSERT INTO `modules` VALUES (1,1,'Get Started','2020-02-02 00:00:00'),(2,1,'Get Started with Calc 2',NULL),(3,2,'Learn Integration by parts','2020-02-20 00:00:00');
 /*!40000 ALTER TABLE `modules` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-31 16:13:47
+-- Dump completed on 2020-02-04 16:49:19
