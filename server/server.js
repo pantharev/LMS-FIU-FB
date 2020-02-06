@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser');
 const keys = require('./app/config/keys');
 
 const app = express();
@@ -19,6 +20,8 @@ const io = require('socket.io')(httpsServer);
 
 const port = 3000;
 
+const allowUrl = ['courses', 'modules'];
+
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -26,18 +29,39 @@ app.use(cors());
 
 // Auth 
 app.use(cookieSession({
+    name: 'LMS-FIU-session',
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey]
 }));
 
+app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
+
 const passportSetup = require('./app/config/passport-setup');
 const authRoutes = require('./app/routes/auth-routes');
 const profileRoutes = require('./app/routes/profile-routes');
+
+/*const authenticationMiddleware = (req, res, next) => {
+
+    if (passport.authenticate('facebook')) {
+        console.log("Authorized access");
+        return next()
+    }
+    res.redirect('/');
+}*/
+
+//app.use(authenticationMiddleware);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 
+/*app.all(() => {
+res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // your website
+res.header('Access-Control-Allow-Credentials', 'true');
+res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
+})*/
 app.get("/", (req, res) => {
     res.json({ message: "Hello world!"});
 });
@@ -60,6 +84,14 @@ require("./app/routes/student.routes.js")(app);
 require("./app/routes/course.routes.js")(app);
 require("./app/routes/student-course.routes.js")(app);
 require("./app/routes/module.routes.js")(app);
+
+// [SH] Catch unauthorised errors
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401);
+      res.json({"message" : err.name + ": " + err.message});
+    }
+  });
 
 /*http.listen(port, () => {
     console.log("http Server is running on port: " + port);

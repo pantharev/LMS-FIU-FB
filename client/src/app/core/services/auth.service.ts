@@ -20,4 +20,9 @@ export class AuthService {
   FBFacebook(){
     return this.http.get(`${environment.apiURL}/auth/facebook`);
   }
+
+  getProfile() {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(`${environment.apiURL}/profile`, {headers: headers});
+  }
 }

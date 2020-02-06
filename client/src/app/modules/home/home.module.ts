@@ -13,6 +13,7 @@ import { CourseService } from '../../core/services/course.service';
 import { LoginComponent } from './pages/login/login.component';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 import {MatIconModule, MatButtonModule, MatCardModule, MatOptionModule, MatAutocompleteModule, MatInputModule} from '@angular/material';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const config = new AuthServiceConfig([
   {
@@ -27,7 +28,7 @@ export function provideConfig(){
 }
 
 @NgModule({
-  declarations: [HomeComponent, CourseBrowserComponent, LoginComponent],
+  declarations: [HomeComponent, CourseBrowserComponent, LoginComponent, ProfileComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
