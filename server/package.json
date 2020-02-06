@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "NODE_ENV=production node ./server/server",
-    "test": "echo \"Error: no test specified\"
+    "test": "echo \"Error: no test specified\""
   },
   "author": "Nicolas Arevalo, James Watson III, Alejandro Arrieta",
   "license": "ISC",
