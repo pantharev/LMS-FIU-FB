@@ -28,9 +28,11 @@ CREATE TABLE `students` (
   `f_name` varchar(255) NOT NULL,
   `l_name` varchar(255) NOT NULL,
   `active` tinyint(1) DEFAULT '0',
+  `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uc_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `uc_email` (`email`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +41,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,'mail@mail.edu','John','Doe',1),(2,'mail2@mail.edu','Jane','Doe',1),(3,'mail3@mail.edu','Ashe','Doe',1),(17,'narev001@fiu.edu','Nick','Arv',1);
+INSERT INTO `students` VALUES (1,'mail@mail.edu','John','Doe',1,NULL),(2,'mail2@mail.edu','Jane','Doe',1,NULL),(3,'mail3@mail.edu','Ashe','Doe',1,NULL),(18,'narev001@fiu.edu','Nick','Arv',1,121067522758903);
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-04 16:49:19
+-- Dump completed on 2020-02-06 21:11:34
